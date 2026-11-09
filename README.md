@@ -20,3 +20,7 @@ Es la dirección a la que se envía una solicitud para obtener un recurso. En es
 ### ¿Qué función cumplen await y response.json()?
 
 await permite esperar una promesa dentro de una función asíncrona sin bloquear la página. Primero espero la respuesta de fetch. Después, response.json() lee el cuerpo y lo convierte en datos de JavaScript. Ese paso también devuelve una promesa.
+
+### ¿Qué diferencia existe entre recibir JSON y recibir directamente una imagen?
+
+El JSON trae campos que puedo leer, como message en Dog CEO. En CATAAS consulto primero la información del gato en JSON y uso el campo url o construyo la ruta con id. La dirección de la foto entrega los bytes de la imagen, por eso la asigno al src y el navegador la muestra.

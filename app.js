@@ -46,3 +46,29 @@ function activarTarjeta(id, cargar) {
 
 activarTarjeta("citas", cargarCita);
 activarTarjeta("datos", cargarDato);
+
+async function mostrarImagen(id, url, descripcion) {
+  const imagen = new Image();
+  imagen.alt = descripcion;
+  imagen.src = url;
+  // Espera a que la foto esté lista.
+  await imagen.decode();
+  document.querySelector("#" + id + " .contenido").replaceChildren(imagen);
+}
+
+async function cargarPerro() {
+  const perro = await leerJSON("https://dog.ceo/api/breeds/image/random");
+  if (!perro.message) throw new Error("Falta la foto del perro.");
+  await mostrarImagen("perros", perro.message, "Perro de la galería de Dog CEO");
+}
+
+async function cargarGato() {
+  const gato = await leerJSON("https://cataas.com/cat?json=true");
+  if (!gato.url && !gato.id) throw new Error("Falta la foto del gato.");
+  const ruta = gato.url || "/cat/" + encodeURIComponent(gato.id);
+  const url = new URL(ruta, "https://cataas.com");
+  await mostrarImagen("gatos", url.href, "Gato de la galería de CATAAS");
+}
+
+activarTarjeta("perros", cargarPerro);
+activarTarjeta("gatos", cargarGato);
