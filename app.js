@@ -33,10 +33,14 @@ function activarTarjeta(id, cargar) {
 
   async function actualizar() {
     try {
+      boton.disabled = true;
+      estado.textContent = "Cargando...";
       await cargar();
       estado.textContent = "";
     } catch {
       estado.textContent = "No se pudo cargar el contenido. Inténtalo otra vez.";
+    } finally {
+      boton.disabled = false;
     }
   }
 
